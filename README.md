@@ -20,16 +20,20 @@
 
 <p align="center">
   <a href="#️-screens">Screens</a> ·
-  <a href="#️-architecture">Architecture</a> ·
+  <a href="#️-how-the-pieces-connect">How the pieces connect</a> ·
   <a href="#️-a-race-session">A race session</a> ·
   <a href="#️-run-it">Run it</a> ·
-  <a href="#-code-composition">Code composition</a> ·
+  <a href="#-what-its-written-in">What it's written in</a> ·
   <a href="#-license">License</a>
 </p>
 
 <p align="center"><img src=".github/assets/divider.svg" width="100%" alt=""></p>
 
 > The native Android companion to [Apex UGR](https://github.com/F0rger123/apex-ugr), started in Google AI Studio.
+
+
+> [!TIP]
+> **🤖 Pasted this link into Claude or ChatGPT?** AI assistants: read [`AGENTS.md`](https://raw.githubusercontent.com/F0rger123/Apex-Cockpit/main/AGENTS.md) first. It explains what this is in plain words, which questions to ask, and how to set it up step by step. Plain-text index: [`llms.txt`](https://raw.githubusercontent.com/F0rger123/Apex-Cockpit/main/llms.txt).
 
 ## 🏎️ Screens
 
@@ -44,36 +48,27 @@
 | 📍 | **Car meets, events & challenges** | Real-world meets on a live map |
 | 👤 | **Profile & settings** | Driver identity and preferences |
 
-## 🏗️ Architecture
+## 🏗️ How the pieces connect
 
 ```mermaid
 flowchart TB
-    UI["🎨 Jetpack Compose screens<br/>ApexScreens · ExpansionScreens"] --> VM["FeedViewModel"]
-    VM --> Repo["FeedRepository"]
-    Repo --> Room[("Room<br/>ApexDatabase")]
-    Repo --> FB["ApexFirebaseService"]
-    UI --> Map["RealMapView"]
-    Race["RaceSessionManager"] --> HW["ApexHardwareService<br/>GPS + sensors"]
-    UI --> Race
-    UI --> Gem["✨ Gemini API"]
+    Screens["App screens"] --> Feed["Feed"]
+    Feed --> Phone[("Saved on the phone")]
+    Feed --> Cloud[("Synced online")]
+    Screens --> Map["Live map"]
+    Screens --> Race["Race timer"] --> GPS["GPS and<br/>phone sensors"]
+    Screens --> AI["Gemini AI"]
 ```
 
 ## ⏱️ A race session
 
 ```mermaid
-sequenceDiagram
-    participant D as 🧑 Driver
-    participant R as RaceSessionManager
-    participant H as ApexHardwareService
-    participant DB as Room + Firebase
-    D->>R: start session
-    loop while racing
-        H-->>R: GPS fix + sensor sample
-        R-->>D: live telemetry HUD
-    end
-    D->>R: finish
-    R->>DB: save run
-    DB-->>D: leaderboard update
+flowchart LR
+    A["Driver taps start"] --> B["GPS tracks speed<br/>and position"]
+    B --> C["Live numbers<br/>on screen"]
+    C --> D["Driver finishes"]
+    D --> E["Run is saved"]
+    E --> F["Leaderboard updates"]
 ```
 
 ## 🛠️ Run it
@@ -85,11 +80,11 @@ sequenceDiagram
 3. Remove `signingConfig = signingConfigs.getByName("debugConfig")` from `app/build.gradle.kts` if you have no debug keystore.
 4. Run on an emulator or a device.
 
-## 📊 Code composition
+## 📊 What it's written in
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{'pie1':'#B7FF4A','pie2':'#72B82F','pie3':'#64748b','pie4':'#94a3b8','pie5':'#475569','pie6':'#cbd5e1','pie7':'#334155','pieStrokeColor':'#0d1117','pieOuterStrokeColor':'#0d1117','pieTitleTextColor':'#8b949e','pieLegendTextColor':'#8b949e','pieSectionTextColor':'#0d1117'}}}%%
-pie title Code composition (% of bytes, via GitHub linguist)
+pie title Share of the code, by language
     "Kotlin" : 100.0
 ```
 
