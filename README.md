@@ -1,21 +1,103 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+<p align="center">
+  <img src=".github/assets/banner.svg" alt="APEX COCKPIT: Native Android telemetry cockpit for the Apex network." width="100%">
+</p>
 
-# Run and deploy your AI Studio app
+<p align="center">
+  <img src="https://img.shields.io/badge/status-public-ef4444?style=for-the-badge" alt="Public">
+  <img src="https://img.shields.io/badge/license-MIT-ef4444?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/github/last-commit/F0rger123/Apex-Cockpit?style=for-the-badge&color=ef4444" alt="Last commit">
+  <img src="https://img.shields.io/github/repo-size/F0rger123/Apex-Cockpit?style=for-the-badge&color=ef4444" alt="Repo size">
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Kotlin-0d1117?style=flat-square&logo=kotlin&logoColor=white" alt="Kotlin">
+  <img src="https://img.shields.io/badge/Jetpack%20Compose-0d1117?style=flat-square&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose">
+  <img src="https://img.shields.io/badge/Android-0d1117?style=flat-square&logo=android&logoColor=white" alt="Android">
+  <img src="https://img.shields.io/badge/Firebase-0d1117?style=flat-square&logo=firebase&logoColor=white" alt="Firebase">
+  <img src="https://img.shields.io/badge/Gemini-0d1117?style=flat-square&logo=googlegemini&logoColor=white" alt="Gemini">
+</p>
 
-This contains everything you need to run your app locally.
+<h3 align="center">A premium automotive social and GPS telemetry app for Android, styled like a performance diagnostics cockpit.</h3>
 
-View your app in AI Studio: https://ai.studio/apps/ad59b493-5d0c-4375-9d33-62a576fb9e48
+<p align="center">
+  <a href="#-screens">Screens</a> ·
+  <a href="#-architecture">Architecture</a> ·
+  <a href="#-a-race-session">A race session</a> ·
+  <a href="#-run-it">Run it</a> ·
+  <a href="#-license">License</a>
+</p>
 
-## Run Locally
+<p align="center"><img src=".github/assets/divider.svg" width="100%" alt=""></p>
 
-**Prerequisites:**  [Android Studio](https://developer.android.com/studio)
+> The native Android companion to [Apex UGR](https://github.com/F0rger123/apex-ugr), started in Google AI Studio.
 
+## 🏎️ Screens
 
-1. Open Android Studio
-2. Select **Open** and choose the directory containing this project
-3. Allow Android Studio to fix any incompatibilities as it imports the project.
-4. Create a file named `.env` in the project directory and set `GEMINI_API_KEY` in that file to your Gemini API key (see `.env.example` for an example)
-5. Remove this line from the app's `build.gradle.kts` file: `signingConfig = signingConfigs.getByName("debugConfig")`
-6. Run the app on an emulator or physical device
+| | Screen | |
+|---|---|---|
+| 📰 | **Home feed / social feed** | Posts from drivers and clubs |
+| 🏁 | **Active race** | Live telemetry while racing |
+| 🎲 | **Mystery race matchmaking** | Get paired with an unknown rival |
+| 🏆 | **Leaderboards & standings** | Season and event rankings |
+| 🚗 | **Garage performance** | Your builds and their numbers |
+| 👥 | **Car clubs & pilots hub** | Find crews and drivers |
+| 📍 | **Car meets, events & challenges** | Real-world meets on a live map |
+| 👤 | **Profile & settings** | Driver identity and preferences |
+
+## 🏗️ Architecture
+
+```mermaid
+flowchart TB
+    UI["🎨 Jetpack Compose screens<br/>ApexScreens · ExpansionScreens"] --> VM["FeedViewModel"]
+    VM --> Repo["FeedRepository"]
+    Repo --> Room[("Room<br/>ApexDatabase")]
+    Repo --> FB["ApexFirebaseService"]
+    UI --> Map["RealMapView"]
+    Race["RaceSessionManager"] --> HW["ApexHardwareService<br/>GPS + sensors"]
+    UI --> Race
+    UI --> Gem["✨ Gemini API"]
+```
+
+## ⏱️ A race session
+
+```mermaid
+sequenceDiagram
+    participant D as 🧑 Driver
+    participant R as RaceSessionManager
+    participant H as ApexHardwareService
+    participant DB as Room + Firebase
+    D->>R: start session
+    loop while racing
+        H-->>R: GPS fix + sensor sample
+        R-->>D: live telemetry HUD
+    end
+    D->>R: finish
+    R->>DB: save run
+    DB-->>D: leaderboard update
+```
+
+## 🛠️ Run it
+
+**Needs:** [Android Studio](https://developer.android.com/studio) and a Gemini API key.
+
+1. Open the project folder in Android Studio and let it sync Gradle.
+2. Copy `.env.example` to `.env` and set `GEMINI_API_KEY`.
+3. Remove `signingConfig = signingConfigs.getByName("debugConfig")` from `app/build.gradle.kts` if you have no debug keystore.
+4. Run on an emulator or a device.
+
+## 📊 Code composition
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'pie1':'#ef4444','pie2':'#facc15','pie3':'#64748b','pie4':'#94a3b8','pie5':'#475569','pie6':'#cbd5e1','pie7':'#334155','pieStrokeColor':'#0d1117','pieOuterStrokeColor':'#0d1117','pieTitleTextColor':'#8b949e','pieLegendTextColor':'#8b949e','pieSectionTextColor':'#0d1117'}}}%%
+pie title Code composition (% of bytes, via GitHub linguist)
+    "Kotlin" : 100.0
+```
+
+## 📜 License
+
+Released under the [MIT License](LICENSE). Use it, fork it, ship it.
+
+<p align="center"><img src=".github/assets/divider.svg" width="100%" alt=""></p>
+
+<p align="center">
+  <sub>Built by <a href="https://github.com/F0rger123"><b>@F0rger123</b></a> · MIT licensed</sub>
+</p>
