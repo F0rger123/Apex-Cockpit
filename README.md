@@ -3,10 +3,10 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/status-public-ef4444?style=for-the-badge" alt="Public">
-  <img src="https://img.shields.io/badge/license-MIT-ef4444?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/github/last-commit/F0rger123/Apex-Cockpit?style=for-the-badge&color=ef4444" alt="Last commit">
-  <img src="https://img.shields.io/github/repo-size/F0rger123/Apex-Cockpit?style=for-the-badge&color=ef4444" alt="Repo size">
+  <img src="https://img.shields.io/badge/status-public-72B82F?style=for-the-badge" alt="Public">
+  <img src="https://img.shields.io/badge/license-MIT-72B82F?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/github/last-commit/F0rger123/Apex-Cockpit?style=for-the-badge&color=72B82F" alt="Last commit">
+  <img src="https://img.shields.io/github/repo-size/F0rger123/Apex-Cockpit?style=for-the-badge&color=72B82F" alt="Repo size">
 </p>
 <p align="center">
   <img src="https://img.shields.io/badge/Kotlin-0d1117?style=flat-square&logo=kotlin&logoColor=white" alt="Kotlin">
@@ -19,10 +19,11 @@
 <h3 align="center">A premium automotive social and GPS telemetry app for Android, styled like a performance diagnostics cockpit.</h3>
 
 <p align="center">
-  <a href="#-screens">Screens</a> ·
-  <a href="#-architecture">Architecture</a> ·
-  <a href="#-a-race-session">A race session</a> ·
-  <a href="#-run-it">Run it</a> ·
+  <a href="#️-screens">Screens</a> ·
+  <a href="#️-architecture">Architecture</a> ·
+  <a href="#️-a-race-session">A race session</a> ·
+  <a href="#️-run-it">Run it</a> ·
+  <a href="#-code-composition">Code composition</a> ·
   <a href="#-license">License</a>
 </p>
 
@@ -87,7 +88,7 @@ sequenceDiagram
 ## 📊 Code composition
 
 ```mermaid
-%%{init: {'theme':'base','themeVariables':{'pie1':'#ef4444','pie2':'#facc15','pie3':'#64748b','pie4':'#94a3b8','pie5':'#475569','pie6':'#cbd5e1','pie7':'#334155','pieStrokeColor':'#0d1117','pieOuterStrokeColor':'#0d1117','pieTitleTextColor':'#8b949e','pieLegendTextColor':'#8b949e','pieSectionTextColor':'#0d1117'}}}%%
+%%{init: {'theme':'base','themeVariables':{'pie1':'#B7FF4A','pie2':'#72B82F','pie3':'#64748b','pie4':'#94a3b8','pie5':'#475569','pie6':'#cbd5e1','pie7':'#334155','pieStrokeColor':'#0d1117','pieOuterStrokeColor':'#0d1117','pieTitleTextColor':'#8b949e','pieLegendTextColor':'#8b949e','pieSectionTextColor':'#0d1117'}}}%%
 pie title Code composition (% of bytes, via GitHub linguist)
     "Kotlin" : 100.0
 ```
